@@ -20,4 +20,9 @@ class ConversionViewModel(private val conversionRepository: ConversionRepository
     fun updateConversions(type: String) {
         _conversions.value = conversionRepository.getConversionsForType(type)
     }
+
+    fun clearResult() {
+        _result.value = null
+    }
 }
+
