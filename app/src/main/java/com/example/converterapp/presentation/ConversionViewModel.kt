@@ -10,7 +10,14 @@ class ConversionViewModel(private val conversionRepository: ConversionRepository
     private val _result = MutableStateFlow<Double?>(null)
     val result: StateFlow<Double?> get() = _result
 
+    private val _conversions = MutableStateFlow<List<Conversion>>(emptyList())
+    val conversions: StateFlow<List<Conversion>> get() = _conversions
+
     fun convert(value: Double, conversion: Conversion) {
-        _result.value = value * conversionRepository.getConversionFactor(conversion.fromUnit, conversion.toUnit)
+        _result.value = value * conversion.factor
+    }
+
+    fun updateConversions(type: String) {
+        _conversions.value = conversionRepository.getConversionsForType(type)
     }
 }
